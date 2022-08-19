@@ -23,15 +23,18 @@
         <li class="list-group-item">Item 2</li>
         <li class="list-group-item">Item 3</li>
         <li class="list-group-item">Item 4</li>
+        <li>Item 5</li>
       </ul>
      </div>
     </div>
     <script>
-    var list=document.getElementsByClassName('list-group-item');
-      list[2].style.background='green';
-      for(let i=0;i<4;i++)
+    var list=document.getElementsByTagName('li');
+    console,console.log((list));
+      list[2].style.fontWeight='bold';
+      for(let i=0;i<list.length;i++)
       {
-          list[i].style.fontWeight='bold';
+          list[i].style.background='gray';
+          list[i].style.color='green';
       }
       </script>
   
