@@ -27,11 +27,12 @@
      </div>
     </div>
     <script>
-        var title=document.getElementById('header-title');
-title.style.border='solid 2px black';
-var item=document.getElementById('add');
-item.style.fontWeight='bold';
-item.style.color='green';
+    var list=document.getElementsByClassName('list-group-item');
+      list[2].style.background='green';
+      for(let i=0;i<4;i++)
+      {
+          list[i].style.fontWeight='bold';
+      }
       </script>
   
   </body>
