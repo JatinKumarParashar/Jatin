@@ -1,4 +1,4 @@
-<!--QuerySelector-->
+<!--QuerySelectorAll-->
 <!DOCTYPE html>
 <html>
     <head>Page title</head>
@@ -28,12 +28,18 @@
      </div>
     </div>
     <script>
-    var list=document.querySelector('.list-group-item:nth-child(2)');
-list.style.background='green';
-var third=document.querySelector('.list-group-item:nth-child(3)');
-third.style.color='white';
-
+    var item=document.querySelectorAll('.list-group-item');
+item[1].style.color='green';
+var odd=document.querySelectorAll('.list-group-item:nth-child(odd)');
+for(let i=0;i<odd.length;i++)
+{
+    odd[i].style.background='green';
+}
       </script>
   
   </body>
   </html>
+
+
+  <!--querySelector can grabes only one element.
+      querySelectorAll can grabes multiple elements in array.-->
