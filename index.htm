@@ -1,3 +1,4 @@
+<!--QuerySelector-->
 <!DOCTYPE html>
 <html>
     <head>Page title</head>
@@ -23,18 +24,15 @@
         <li class="list-group-item">Item 2</li>
         <li class="list-group-item">Item 3</li>
         <li class="list-group-item">Item 4</li>
-        <li>Item 5</li>
       </ul>
      </div>
     </div>
     <script>
-    var list=document.getElementsByTagName('li');
-      list[2].style.fontWeight='bold';
-      for(let i=0;i<list.length;i++)
-      {
-          list[i].style.background='gray';
-          list[i].style.color='green';
-      }
+    var list=document.querySelector('.list-group-item:nth-child(2)');
+list.style.background='green';
+var third=document.querySelector('.list-group-item:nth-child(3)');
+third.style.color='white';
+
       </script>
   
   </body>
