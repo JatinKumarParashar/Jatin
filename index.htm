@@ -42,25 +42,31 @@ filter.addEventListener('keyup',filteritems);
 function addItem(e){
      e.preventDefault();
      var newitem=document.getElementById('item').value;
+     var dis=document.getElementById('discription').value;
+     var editbtn=document.createElement('button');
      var li=document.createElement('li');
      li.className='list-group-item';
-
-     li.appendChild(document.createTextNode(newitem+' '));
+    
+     localStorage.setItem('item',`${newitem}`);
+     localStorage.setItem('discription',`${dis}`);
+     li.appendChild(document.createTextNode(localStorage.getItem('item')+' '));
      var deletebtn=document.createElement('button');
      deletebtn.className='btn btn-sm float right delete';
      deletebtn.appendChild(document.createTextNode('X'));
      li.appendChild(deletebtn);
-     var editbtn=document.createElement('button');
+     
      editbtn.className='edit';
      editbtn.appendChild(document.createTextNode('Edit'));
      li.appendChild(editbtn);
      
      itemlist.appendChild(li);
-     var dis=document.getElementById('discription').value;
+     
      var newdis=document.createElement('p');
      newdis.className='d';
-     newdis.appendChild(document.createTextNode(dis));
+     newdis.appendChild(document.createTextNode(localStorage.getItem('discription')));
      li.appendChild(newdis);
+     var k=localStorage.getItem('newitem');
+     var v=localStorage.getItem('')
 
 }
 
@@ -86,7 +92,8 @@ function filteritems(e){
     else{
         item.style.display='none';
     }
-  }); 
+  });
+  
 }
       </script>
   
