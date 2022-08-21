@@ -5,15 +5,17 @@
 <body>
     <header id="main-header">
       <div class="container">
-        <h1 id="header-title">Item Lister </h1>
+        <h1 id="header-title">Booking App </h1>
         <input type="text" id="filter" placeholder="search here..." />
       </div>
     </header>
     <div class="container">
      <div id="main">
-      <h id="add" class="title">Add Items and Discription</h>
-      <form class="form-inline mb-3" id="addForm">
+      <h id="add" class="title">Booking</h>
+      <form onsubmit="saveItem(event)" class="form-inline mb-3" id="addForm">
+        <label>Name:</label>
         <input type="text" class="form-control mr-2" id="item">
+        <label>Email ID:</label>
         <input type="text" class="form-control mr-2" id="discription" />
         <input type="submit" class="btn btn-dark" value="Submit">
       </form>
@@ -35,38 +37,36 @@
    var form=document.getElementById('addForm');
 var itemlist=document.getElementById('items');
 var filter=document.getElementById('filter');
-form.addEventListener('submit',addItem);
 itemlist.addEventListener('click',removeitem);
 filter.addEventListener('keyup',filteritems);
 
-function addItem(e){
-     e.preventDefault();
-     var newitem=document.getElementById('item').value;
-     var dis=document.getElementById('discription').value;
-     var editbtn=document.createElement('button');
-     var li=document.createElement('li');
-     li.className='list-group-item';
-    
-     localStorage.setItem('item',`${newitem}`);
-     localStorage.setItem('discription',`${dis}`);
-     li.appendChild(document.createTextNode(localStorage.getItem('item')+' '));
-     var deletebtn=document.createElement('button');
-     deletebtn.className='btn btn-sm float right delete';
-     deletebtn.appendChild(document.createTextNode('X'));
-     li.appendChild(deletebtn);
-     
-     editbtn.className='edit';
-     editbtn.appendChild(document.createTextNode('Edit'));
-     li.appendChild(editbtn);
-     
-     itemlist.appendChild(li);
-     
-     var newdis=document.createElement('p');
-     newdis.className='d';
-     newdis.appendChild(document.createTextNode(localStorage.getItem('discription')));
-     li.appendChild(newdis);
-     var k=localStorage.getItem('newitem');
-     var v=localStorage.getItem('')
+function saveItem(event){
+    event.preventDefault();
+    const newitem=event.target.item.value;
+    const dis=event.target.discription.value;
+    var obj={
+        newitem,
+        dis
+    }
+    localStorage.setItem(dis,JSON.stringify(obj));
+    showUsreOnScreen(obj);
+}
+function showUsreOnScreen(user){
+    var parent=document.getElementById('items');
+    var childHTML=`<li> ${user.newitem} <button class="btn btn-sm float right
+    delete"> x</button> <br> ${user.dis}`;
+    parent.innerHTML=parent.innerHTML+childHTML;
+}
+window.addEventListener('DOMContentLoaded',saved);
+function saved(e){
+Object.keys(localStorage).forEach(fun);
+  
+} 
+function fun(key){
+    stringifiedDetailsOfPeople = localStorage.getItem(key);
+
+    detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
+    showUsreOnScreen(detailsOfPeople); 
 
 }
 
@@ -87,7 +87,7 @@ function filteritems(e){
     var di=item.lastChild.textContent;
     if(itemName.toLowerCase().indexOf(text)!=-1||di.toLowerCase().indexOf(text)!=-1)
     {
-        item.style.display='block';
+        item.style.display='list-item';
     }
     else{
         item.style.display='none';
