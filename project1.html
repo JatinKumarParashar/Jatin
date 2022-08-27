@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+    <title>Expence Trackers</title>
+    <body>
+        <form onsubmit="savetolocalstorage(event)" id="form">
+            <label>Expance Amount:</label>
+            <input type="text" id="amount">
+            <label>Description:</label>
+            <input type="text" id="description">
+            <label>Category:</label>
+            <input list="categorys" id="category">
+            <datalist id="categorys">
+                <option value="Food">
+                <option value="Fuel">
+                <option value="Movies">
+                <option value="Bill">
+            </datalist>
+            <button type="submit" id="submit">Add Expence</button>
+
+        </form>
+        <ul id="list">
+
+        </ul>
+        <script>
+            // Save Expence to Local Storage
+function savetolocalstorage(event){
+    event.preventDefault();
+    const amm=event.target.amount.value;
+    const des=event.target.description.value;
+    const cat=event.target.category.value;
+    var obj={
+        amm:amm,
+        des:des,
+        cat:cat
+    }
+    localStorage.setItem(obj.des,JSON.stringify(obj));
+    seeOnScreen(obj);
+}
+// Printing Added Expence 
+window.addEventListener('DOMContentLoaded',saved);
+function saved(){
+    Object.keys(localStorage).forEach(fun); 
+} 
+function fun(key){
+    stringifiedDetailsOfPeople = localStorage.getItem(key);
+
+    detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
+    seeOnScreen(detailsOfPeople); 
+
+}
+// Showing Expence On screen
+function seeOnScreen(obj)
+{
+  if(localStorage.getItem(obj.des)!==null)
+   {
+    removefromscreen(obj.des);
+   }
+   
+    var parent=document.getElementById('list');
+    var childHTML=`<li id=${obj.des}>${obj.amm} - ${obj.cat} - ${obj.des}
+                     <button onclick=remove('${obj.des}') >Delete Expence</button> 
+                     <button onclick=edit('${obj.amm}','${obj.des}','${obj.cat}')>Edit Expence</button></li>`;
+    parent.innerHTML=parent.innerHTML+childHTML;
+}
+// Delete Expence
+function remove(des){
+    localStorage.removeItem(des);
+    removefromscreen(des);
+}
+// Edit Expence
+function edit(amm,des,cat){
+    remove(des);
+    document.getElementById('amount').value=amm;
+    document.getElementById('description').value=des;
+    document.getElementById('category').value=cat;
+}
+// Remove Expence from Screen
+function removefromscreen(des){
+    const paren=document.getElementById('list');
+    const deletechild=document.getElementById(des);
+    if(deletechild)
+    {
+        paren.removeChild(deletechild);
+    }
+}
+        </script>
+    </body>
+</html>
