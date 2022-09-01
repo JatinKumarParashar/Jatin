@@ -44,7 +44,7 @@
                         showUsreOnScreen(response.data[i]);
                     }
             }).catch(()=>{
-                console.log('Somthing went wrong');
+                console.log('somthing went wrong');
             })
            
                 
@@ -63,14 +63,22 @@
                 parent.innerHTML=parent.innerHTML+childHTML;
             }
 
+             function editUserDetails(emailId,name,phone,_id)
+            {
+                document.getElementById('email').value=emailId;
+                document.getElementById('username').value=name;
+                document.getElementById('phonenumber').value=phone;
+                deleteUser(_id);
+            }
+
             function deleteUser(_id){
                 console.log(_id)
-                removeUserFromScreen(_id);
+                
                 axios.delete(`https://crudcrud.com/api/68550e9cf60d422cb9f2bb612525b7ea/data/${_id}`)
                 .then(()=>{
                     console.log('delete user');
                 })
-
+                removeUserFromScreen(_id);
             }
 
             function removeUserFromScreen(_id){
